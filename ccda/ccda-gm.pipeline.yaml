@@ -23,7 +23,7 @@
     type: https://dartnet.info/graphModel/Person
     scriptFile: transformations/ccda-to-graph.script.yaml
 
-- operation: writeGraph
+# - operation: writeGraph
     
 # - operation: valueset
 #   params:
@@ -42,11 +42,11 @@
 # - operation: measures
 #   params:
 # - operation: writeGraph
-#- operation: saveGraph/neo4j
-#  params:
-#    cfg: ../lsaneo.config.yaml
-#    user: ${user}
-#    pwd: ${pwd}
-#    uri: ${uri}
-#    db: neo4j
-#    batchSize: 0
+- operation: neo4j/merge
+  params:
+    cfg: ../lsaneo.config.yaml
+    user: ${user}
+    pwd: ${pwd}
+    uri: ${uri}
+    db: neo4j
+    batchSize: 0
