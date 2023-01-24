@@ -3,7 +3,6 @@ package cmd
 import (
 	"fmt"
 	"sync"
-	"time"
 
 	"github.com/cloudprivacylabs/lpg"
 	neo "github.com/cloudprivacylabs/lsa-neo4j"
@@ -13,7 +12,7 @@ import (
 	"github.com/cloudprivacylabs/opencypher"
 	"github.com/drone/envsubst"
 	_ "github.com/joho/godotenv/autoload"
-	"github.com/neo4j/neo4j-go-driver/v4/neo4j"
+	"github.com/neo4j/neo4j-go-driver/v5/neo4j"
 )
 
 type Neo4jStep struct {
@@ -26,7 +25,7 @@ type Neo4jStep struct {
 	URI       string `json:"uri" yaml:"uri"`
 }
 
-func (step Neo4jStep) getSession() *neo.Session {
+func (step Neo4jStep) getSession(ctx *ls.Context) *neo.Session {
 	user, err := envsubst.EvalEnv(step.User)
 	if err != nil {
 		panic(err)
@@ -49,7 +48,7 @@ func (step Neo4jStep) getSession() *neo.Session {
 	} else {
 		auth = neo4j.NoAuth()
 	}
-	driver, err := neo4j.NewDriver(uri, auth)
+	driver, err := neo4j.NewDriverWithContext(uri, auth)
 	if err != nil {
 		panic(err)
 	}
@@ -58,7 +57,7 @@ func (step Neo4jStep) getSession() *neo.Session {
 		panic(err)
 	}
 	drv := neo.NewDriver(driver, db)
-	return drv.NewSession()
+	return drv.NewSession(ctx)
 }
 
 func (step Neo4jStep) getConfig() neo.Config {
@@ -71,37 +70,37 @@ func (step Neo4jStep) getConfig() neo.Config {
 	return cfg
 }
 
-type SaveGraphStep struct {
-	session *neo.Session
-	cfg     neo.Config
-	Neo4jStep
-}
+// type SaveGraphStep struct {
+// 	session *neo.Session
+// 	cfg     neo.Config
+// 	Neo4jStep
+// }
 
-func (s *SaveGraphStep) Run(pctx *pipeline.PipelineContext) error {
-	if s.session == nil {
-		s.session = s.getSession()
-		s.cfg = s.getConfig()
-	}
-	// begin new transaction
-	tx, err := s.session.BeginTransaction()
-	if err != nil {
-		pctx.ErrorLogger(pctx, err)
-		return err
-	}
-	start := time.Now()
-	_, err = neo.SaveGraph(pctx.Context, s.session, tx, pctx.Graph, func(*lpg.Node) bool { return true }, s.cfg, s.BatchSize)
-	if err != nil {
-		tx.Rollback()
-		pctx.ErrorLogger(pctx, err)
-		return err
-	}
-	pctx.Context.GetLogger().Info(map[string]interface{}{"time elapsed for graph creation": time.Since(start)})
-	if err := tx.Commit(); err != nil {
-		pctx.ErrorLogger(pctx, err)
-		return err
-	}
-	return nil
-}
+// func (s *SaveGraphStep) Run(pctx *pipeline.PipelineContext) error {
+// 	if s.session == nil {
+// 		s.session = s.getSession()
+// 		s.cfg = s.getConfig()
+// 	}
+// 	// begin new transaction
+// 	tx, err := s.session.BeginTransaction()
+// 	if err != nil {
+// 		pctx.ErrorLogger(pctx, err)
+// 		return err
+// 	}
+// 	start := time.Now()
+// 	_, err = neo.SaveGraph(pctx.Context, s.session, tx, pctx.Graph, func(*lpg.Node) bool { return true }, s.cfg, s.BatchSize)
+// 	if err != nil {
+// 		tx.Rollback()
+// 		pctx.ErrorLogger(pctx, err)
+// 		return err
+// 	}
+// 	pctx.Context.GetLogger().Info(map[string]interface{}{"time elapsed for graph creation": time.Since(start)})
+// 	if err := tx.Commit(); err != nil {
+// 		pctx.ErrorLogger(pctx, err)
+// 		return err
+// 	}
+// 	return nil
+// }
 
 type MergeGraphStep struct {
 	session       *neo.Session
@@ -136,7 +135,7 @@ func (s *MergeGraphStep) getIDToCache(g *lpg.Graph) string {
 	return ""
 }
 
-func (s *MergeGraphStep) createNodesEdges(ctx *ls.Context, tx neo4j.Transaction, dbGraph *neo.DBGraph, delta []neo.Delta) error {
+func (s *MergeGraphStep) createNodesEdges(ctx *ls.Context, tx neo4j.ExplicitTransaction, dbGraph *neo.DBGraph, delta []neo.Delta) error {
 	// Create nodes
 	createNodeDeltas := neo.SelectDelta(delta, func(d neo.Delta) bool {
 		_, ok := d.(neo.CreateNodeDelta)
@@ -161,7 +160,7 @@ func (s *MergeGraphStep) createNodesEdges(ctx *ls.Context, tx neo4j.Transaction,
 		edges = append(edges, c.(neo.CreateEdgeDelta).DBEdge)
 	}
 	if len(edges) > 0 {
-		if err := neo.CreateEdgesUnwind(ctx, edges, dbGraph.NodeIds, s.cfg)(tx); err != nil {
+		if err := neo.CreateEdgesUnwind(ctx, s.session, edges, dbGraph.NodeIds, s.cfg)(tx); err != nil {
 			return err
 		}
 	}
@@ -177,7 +176,7 @@ func (s *MergeGraphStep) createNodesEdges(ctx *ls.Context, tx neo4j.Transaction,
 	})
 
 	for _, c := range updateDeltas {
-		if err := c.Run(tx, dbGraph.NodeIds, dbGraph.EdgeIds, s.cfg); err != nil {
+		if err := c.Run(ctx, tx, s.session, dbGraph.NodeIds, dbGraph.EdgeIds, s.cfg); err != nil {
 			return err
 		}
 	}
@@ -187,12 +186,12 @@ func (s *MergeGraphStep) createNodesEdges(ctx *ls.Context, tx neo4j.Transaction,
 
 func (s *MergeGraphStep) Run(pctx *pipeline.PipelineContext) error {
 	if s.session == nil {
-		s.session = s.getSession()
+		s.session = s.getSession(pctx.Context)
 		s.cfg = s.getConfig()
 		s.cachedDBGraph = make(map[string]*neo.DBGraph)
 	}
 
-	merge := func(tx neo4j.Transaction, graph *lpg.Graph, useCache bool) (*neo.DBGraph, []neo.Delta, error) {
+	merge := func(tx neo4j.ExplicitTransaction, graph *lpg.Graph, useCache bool) (*neo.DBGraph, []neo.Delta, error) {
 		var dbGraph *neo.DBGraph
 		if useCache {
 			idc := s.getIDToCache(graph)
@@ -208,7 +207,7 @@ func (s *MergeGraphStep) Run(pctx *pipeline.PipelineContext) error {
 
 		if dbGraph == nil {
 			var err error
-			dbGraph, err = s.session.LoadDBGraph(tx, graph, s.cfg)
+			dbGraph, err = s.session.LoadDBGraph(pctx.Context, tx, graph, s.cfg, &neo.Neo4jCache{})
 			if err != nil {
 				return nil, nil, err
 			}
@@ -221,7 +220,7 @@ func (s *MergeGraphStep) Run(pctx *pipeline.PipelineContext) error {
 		return dbGraph, delta, nil
 	}
 
-	doTx := func(tx neo4j.Transaction, delta []neo.Delta, dbGraph *neo.DBGraph, useCache bool) error {
+	doTx := func(tx neo4j.ExplicitTransaction, delta []neo.Delta, dbGraph *neo.DBGraph, useCache bool) error {
 		pctx.Context.GetLogger().Debug(map[string]interface{}{"Merge delta": len(delta)})
 		if err := s.createNodesEdges(pctx.Context, tx, dbGraph, delta); err != nil {
 			return err
@@ -229,7 +228,7 @@ func (s *MergeGraphStep) Run(pctx *pipeline.PipelineContext) error {
 		if err := neo.LinkMergedEntities(pctx.Context, tx, s.cfg, delta, dbGraph.NodeIds); err != nil {
 			return err
 		}
-		if err := tx.Commit(); err != nil {
+		if err := tx.Commit(pctx.Context); err != nil {
 			pctx.ErrorLogger(pctx, err)
 			return err
 		}
@@ -241,7 +240,7 @@ func (s *MergeGraphStep) Run(pctx *pipeline.PipelineContext) error {
 		}
 		return nil
 	}
-	transaction, err := s.session.BeginTransaction()
+	transaction, err := s.session.BeginTransaction(pctx.Context)
 	if err != nil {
 		pctx.ErrorLogger(pctx, err)
 		return err
@@ -252,7 +251,7 @@ func (s *MergeGraphStep) Run(pctx *pipeline.PipelineContext) error {
 		return err
 	}
 	if err := doTx(transaction, delta, dbGraph, true); err != nil {
-		transaction.Rollback()
+		transaction.Rollback(pctx.Context)
 		pctx.ErrorLogger(pctx, err)
 		return err
 	}
@@ -260,6 +259,6 @@ func (s *MergeGraphStep) Run(pctx *pipeline.PipelineContext) error {
 }
 
 func init() {
-	pipeline.RegisterPipelineStep("neo4j/save", func() pipeline.Step { return &SaveGraphStep{} })
+	// pipeline.RegisterPipelineStep("neo4j/save", func() pipeline.Step { return &SaveGraphStep{} })
 	pipeline.RegisterPipelineStep("neo4j/merge", func() pipeline.Step { return &MergeGraphStep{} })
 }
