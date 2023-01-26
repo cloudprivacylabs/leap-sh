@@ -49,7 +49,7 @@ reshapeNodes:
 
   "https://dartnet.info/graphModel/Person/observations/element":
     valueExpr: >-
-      match (obs:`https://hl7.org/ccda/v3/Observation`) return obs as observation
+      match (obs:Observation) return obs as observation
     mapContext: return observation
 
   "https://dartnet.info/graphModel/Observation/id":
@@ -96,7 +96,7 @@ reshapeNodes:
 ### Procedure
   "https://dartnet.info/graphModel/Person/procedures/element":
     valueExpr: >-
-      match (n:`https://hl7.org/ccda/v3/Procedure`) return n as procedure
+      match (n:Procedure) return n as procedure
     mapContext: return procedure
 
   "https://dartnet.info/graphModel/Procedure/id":
@@ -146,11 +146,12 @@ reshapeNodes:
       - match (sa)-[*]->(t:EffectiveTimeHigh) return t
       - match (sa)-[*]->(t:EffectiveTimeValue) return t
 
-####
+#### Visit
+
   "https://dartnet.info/graphModel/Visit/visit/element":
     evaluate: 
     - >-
-      match (n:`https://hl7.org/ccda/v3/Procedure`) return n as visit
+      match (n:Encounter) return n as visit
     valueExpr:
       return visit
     mapContext: return visit
