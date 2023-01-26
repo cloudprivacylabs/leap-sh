@@ -53,15 +53,8 @@ reshapeNodes:
     mapContext: return observation
 
   "https://dartnet.info/graphModel/Observation/id":
-    source: https://hl7.org/ccda/v3/Observation
+    source: https://hl7.org/ccda/v3/Observation/id/root
 
-  "https://dartnet.info/graphModel/Observation/type":
-    evaluate:
-      - >-
-        match (observation)-[*]->(c {system:"http://terminology.hl7.org/CodeSystem/observation-category"})
-               return c as observationTypeCode
-    valueExpr:
-      - return observationTypeCode.code
   
   "https://dartnet.info/graphModel/Observation/measuredValue/source":
     valueExpr: >-

@@ -16,13 +16,14 @@
 # Next step is to convert that CCDA graph into the common graph model.
 # The graph model is Person centric.
     
-- operation: reshape
-  params:
-    bundle:
-      - ../graphmodel/graphmodel.bundle.yaml
-    type: https://dartnet.info/graphModel/Person
-    scriptFile: transformations/ccda-to-graph.script.yaml
+# - operation: reshape
+#   params:
+#     bundle:
+#       - ../graphmodel/graphmodel.bundle.yaml
+#     type: https://dartnet.info/graphModel/Person
+#     scriptFile: transformations/ccda-to-graph.script.yaml
 
+    
 # - operation: writeGraph
     
 # - operation: valueset

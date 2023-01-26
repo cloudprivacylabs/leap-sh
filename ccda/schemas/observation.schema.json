@@ -10,6 +10,20 @@
         "attributeName": "observation",
         "attributeList": [
             {
+                "@id": "https://hl7.org/ccda/v3/Observation/id",
+                "@type": "Object",
+                "xmlns": "urn:hl7-org:v3",
+                "attributeName": "id",
+                "attributeList": [
+                    {
+                        "@id": "https://hl7.org/ccda/v3/Observation/id/root",
+                        "@type":"Value",
+                        "attributeName": "root",
+                        "xmlattribute": true
+                    }
+                ]
+            },
+            {
                 "@id": "https://hl7.org/ccda/v3/Observation/classCode",
                 "@type": "Value",
                 "attributeName": "classCode",
