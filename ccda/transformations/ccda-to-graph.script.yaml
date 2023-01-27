@@ -6,28 +6,52 @@ reshapeNodes:
       return Patient
 
   "https://dartnet.info/graphModel/Person/id":
-    valueExpr: >-
-      match (:Patient)-[*]->(id {`https://lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/patientRole/id/extension"}) return id limit 1
-
-
-
-      
-      
-  # "https://dartnet.info/graphModel/Person/measurements/element":
+    # valueExpr: >-
+    #   match (:Patient)-[*]->(id {`https://lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/patientRole/id/extension"}) return id limit 1
+    source: https://hl7.org/ccda/v3/patientRole/id/contextId
+  # "https://dartnet.info/graphModel/Person/id":
   #   valueExpr: >-
-  #     match (measurement:VitalSignObservation) return measurement as measurement
-  #   mapContext: >-
-  #     return measurement
-
-  # "https://dartnet.info/graphModel/Measurement/date":
-  #   valueExpr: 
-  #     - match (measurement)-[*]->(t:EffectiveTimeValue) return t
-  #     - match (measurement)-[*]->(t:EffectiveTimeHigh) return t
-  #     - match (measurement)-[*]->(t:EffectiveTimeLow) return t
+  #     match (:Patient)-[*]->(id {`https://lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/patientRole/id/extension"}) return id limit 1
 
 
 
+  ### Measurement
       
+  "https://dartnet.info/graphModel/Person/measurements/element":
+    valueExpr: >-
+      match (measurement:VitalSignObservation) return measurement as measurement
+    mapContext: >-
+      return measurement
+
+  "https://dartnet.info/graphModel/Measurement/id":
+    source: https://hl7.org/ccda/v3/VitalSigns/Observation/id/root
+
+  "https://dartnet.info/graphModel/Measurement/date":
+    valueExpr: 
+      - match (measurement)-[*]->(t:EffectiveTimeValue) return t
+      - match (measurement)-[*]->(t:EffectiveTimeHigh) return t
+      - match (measurement)-[*]->(t:EffectiveTimeLow) return t
+
+  "https://dartnet.info/graphModel/Measurement/source":
+    evaluate: >-
+      match (cond)-[]->
+           ({`https://lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/VitalSignsSection/code"})-[*]->
+           (v {`https://lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/VitalSignsSection/code/*"})
+           return v as condCode 
+    valueExpr:
+      - return condCode
+  
+  "https://dartnet.info/graphModel/Measurement/source/system":
+    valueExpr:
+      - return condCode.codeSystem
+  "https://dartnet.info/graphModel/Measurement/source/code":
+    valueExpr:
+      - return condCode.code
+  "https://dartnet.info/graphModel/Measurement/source/text":
+    valueExpr:
+      - return condCode.displayName
+
+  ### Condition
 
   "https://dartnet.info/graphModel/Person/conditions/element":
     valueExpr: >-
@@ -44,6 +68,25 @@ reshapeNodes:
     valueExpr: 
       - match (cond)-[*]->(t:EffectiveTimeHigh) return t
       - match (cond)-[*]->(t:EffectiveTimeValue) return t
+  
+  "https://dartnet.info/graphModel/Condition/source":
+    evaluate: >-
+      match (cond)-[]->
+           ({`https://lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/VitalSignsSection/code"})-[*]->
+           (v {`https://lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/VitalSignsSection/code/*"})
+           return v as condCode 
+    valueExpr:
+      - return condCode
+  
+  "https://dartnet.info/graphModel/Condition/source/system":
+    valueExpr:
+      - return condCode.codeSystem
+  "https://dartnet.info/graphModel/Condition/source/code":
+    valueExpr:
+      - return condCode.code
+  "https://dartnet.info/graphModel/Condition/source/text":
+    valueExpr:
+      - return condCode.displayName
 
 ### Observation
 
@@ -53,7 +96,7 @@ reshapeNodes:
     mapContext: return observation
 
   "https://dartnet.info/graphModel/Observation/id":
-    source: https://hl7.org/ccda/v3/Observation/id/root
+    source: https://hl7.org/ccda/v3/ProblemAct/Observation/id/root
 
   
   "https://dartnet.info/graphModel/Observation/measuredValue/source":
@@ -64,21 +107,21 @@ reshapeNodes:
   "https://dartnet.info/graphModel/Observation/source":
     evaluate: >-
       match (observation)-[]->
-           ({`https://lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/Observation/code"})-[*]->
-           (v {`https://lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/Observation/code/coding/*"})
+           ({`https://lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/ProblemAct/Observation/code"})-[*]->
+           (v {`https://lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/ProblemAct/Observation/code/*"})
            return v as observationCode 
     valueExpr:
       - return observationCode
   
   "https://dartnet.info/graphModel/Observation/source/system":
     valueExpr:
-      - return observationCode.system
+      - return observationCode.codeSystem
   "https://dartnet.info/graphModel/Observation/source/code":
     valueExpr:
       - return observationCode.code
   "https://dartnet.info/graphModel/Observation/source/text":
     valueExpr:
-      - return observationCode.display
+      - return observationCode.displayName
 
 
   "https://dartnet.info/graphModel/Observation/person":
@@ -125,7 +168,7 @@ reshapeNodes:
       
   "https://dartnet.info/graphModel/Person/drugExposures/element":
     valueExpr: >-
-      match (sa:SubstanceAdministration) return sa as sa
+      match (sa:MedicationSubstanceAdministration) return sa as sa
     mapContext: >-
       return sa
 
@@ -148,6 +191,34 @@ reshapeNodes:
     valueExpr:
       return visit
     mapContext: return visit
+
+  "https://dartnet.info/graphModel/Visit/id":
+    source: https://hl7.org/ccda/v3/encounter/id/root
+
+  
+  "https://dartnet.info/graphModel/Visit/measuredValue/source":
+    valueExpr: >-
+      match (observation)-[]->(v {`https://lschema.org/attributeName`:"valueQuantity"}) return v as valueQuantity
+    mapContext: return valueQuantity
+
+  "https://dartnet.info/graphModel/Visit/source":
+    evaluate: >-
+      match (observation)-[]->
+           ({`https://lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/EncounterSection/code"})-[*]->
+           (v {`https://lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/EncounterSection/code/*"})
+           return v as visitCode 
+    valueExpr:
+      - return visitCode
+  
+  "https://dartnet.info/graphModel/Visit/source/system":
+    valueExpr:
+      - return visitCode.codeSystem
+  "https://dartnet.info/graphModel/Visit/source/code":
+    valueExpr:
+      - return visitCode.code
+  "https://dartnet.info/graphModel/Visit/source/text":
+    valueExpr:
+      - return visitCode.displayName
 
   # "https://dartnet.info/graphModel/Appointment/id":
   #   source: https://hl7.org/ccda/v3/Procedure/id
