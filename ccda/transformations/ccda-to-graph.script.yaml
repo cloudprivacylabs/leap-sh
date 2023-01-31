@@ -7,11 +7,11 @@ reshapeNodes:
 
   "https://dartnet.info/graphModel/Person/id":
     # valueExpr: >-
-    #   match (:Patient)-[*]->(id {`ls:schemaNodeId`:"https://hl7.org/ccda/v3/patientRole/id/extension"}) return id limit 1
+    #   match (:Patient)-[*]->(id {`https:lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/patientRole/id/extension"}) return id limit 1
     source: https://hl7.org/ccda/v3/patientRole/id/contextId
   # "https://dartnet.info/graphModel/Person/id":
   #   valueExpr: >-
-  #     match (:Patient)-[*]->(id {`ls:schemaNodeId`:"https://hl7.org/ccda/v3/patientRole/id/extension"}) return id limit 1
+  #     match (:Patient)-[*]->(id {`https:lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/patientRole/id/extension"}) return id limit 1
 
 
 
@@ -33,7 +33,7 @@ reshapeNodes:
       - match (measurement)-[*]->(t:EffectiveTimeLow) return t
 
   "https://dartnet.info/graphModel/Measurement/source":
-    valueExpr: match (measurement)-[]->(n {`ls:schemaNodeId`:"https://hl7.org/ccda/v3/VitalSigns/Observation/code"}) return n as measurementSource
+    valueExpr: match (measurement)-[]->(n {`https:lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/VitalSigns/Observation/code"}) return n as measurementSource
     mapContext: return measurementSource
   
   "https://dartnet.info/graphModel/Measurement/source/system":
@@ -66,8 +66,8 @@ reshapeNodes:
   # "https://dartnet.info/graphModel/Condition/source":
   #   evaluate: >-
   #     match (cond)-[]->
-  #          ({`ls:schemaNodeId`:"https://hl7.org/ccda/v3/VitalSignsSection/code"})-[*]->
-  #          (v {`ls:schemaNodeId`:"https://hl7.org/ccda/v3/VitalSignsSection/code/*"})
+  #          ({`https:lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/VitalSignsSection/code"})-[*]->
+  #          (v {`https:lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/VitalSignsSection/code/*"})
   #          return v as condCode 
   #   valueExpr:
   #     - return condCode
@@ -99,12 +99,12 @@ reshapeNodes:
     mapContext: return valueQuantity
 
   "https://dartnet.info/graphModel/Observation/source":
-    valueExpr: match (observation)-[]->(n {`ls:schemaNodeId`:"https://hl7.org/ccda/v3/ProblemAct/Observation/code"}) return n as observationSource
+    valueExpr: match (observation)-[]->(n {`https:lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/ProblemAct/Observation/code"}) return n as observationSource
     mapContext: return observationSource
     # evaluate: >-
     #   match (observation)-[]->
-    #        ({`ls:schemaNodeId`:"https://hl7.org/ccda/v3/ProblemAct/Observation/code"})-[*]->
-    #        (v {`ls:schemaNodeId`:"https://hl7.org/ccda/v3/ProblemAct/Observation/code/*"})
+    #        ({`https:lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/ProblemAct/Observation/code"})-[*]->
+    #        (v {`https:lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/ProblemAct/Observation/code/*"})
     #        return v as observationCode 
     # valueExpr:
     #   - return observationCode
@@ -120,7 +120,7 @@ reshapeNodes:
 
   "https://dartnet.info/graphModel/Observation/person":
     valueExpr:
-      - match (patient)-[]->(id {`ls:schemaNodeId`:"https://hl7.org/ccda/v3/Patient/id"}) return id
+      - match (patient)-[]->(id {`https:lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/Patient/id"}) return id
 
     
 ### Procedure
@@ -133,7 +133,7 @@ reshapeNodes:
     source: https://hl7.org/ccda/v3/ProcedureSection/entry/procedure
   
   "https://dartnet.info/graphModel/Procedure/source":
-    valueExpr: match (Procedure)-[]->(n {`ls:schemaNodeId`:"https://hl7.org/ccda/v3/Procedure/code"}) return n as procedureSource
+    valueExpr: match (Procedure)-[]->(n {`https:lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/Procedure/code"}) return n as procedureSource
     mapContext: return procedureSource
 
   "https://dartnet.info/graphModel/Procedure/source/system":
@@ -148,11 +148,11 @@ reshapeNodes:
       
   # "https://dartnet.info/graphModel/Procedure/date":
   #   valueExpr:
-  #     - match (procedure)-[]->({`ls:schemaNodeId`:"https://hl7.org/ccda/v3/Procedure/performedPeriod"})-[]->(d {`https://lschema.org/attributeName`:"start"}) return d
+  #     - match (procedure)-[]->({`https:lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/Procedure/performedPeriod"})-[]->(d {`https://lschema.org/attributeName`:"start"}) return d
 
   # "https://dartnet.info/graphModel/Procedure/person":
   #   valueExpr:
-  #     - match (patient)-[]->(id {`ls:schemaNodeId`:"https://hl7.org/ccda/v3/Patient/id"}) return id
+  #     - match (patient)-[]->(id {`https:lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/Patient/id"}) return id
 
 #### Drug Exposure
       
@@ -174,11 +174,11 @@ reshapeNodes:
 
   "https://dartnet.info/graphModel/DrugExposure/source":
     valueExpr: >-
-      match (sa)-[]->({`ls:schemaNodeId`:"https://hl7.org/ccda/v3/MedicationSubstanceAdministration/consumable/manufacturedProduct"})-[*]->
-        ({`ls:schemaNodeId`:"https://hl7.org/ccda/v3/MedicationSubstanceAdministration/consumable/manufacturedProduct/manufacturedMaterial"})-[*]->
-        (v {`ls:schemaNodeId`:"https://hl7.org/ccda/v3/MedicationSubstanceAdministration/consumable/manufacturedProduct/manufacturedMaterial/code"})
+      match (sa)-[]->({`https:lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/MedicationSubstanceAdministration/consumable/manufacturedProduct"})-[*]->
+        ({`https:lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/MedicationSubstanceAdministration/consumable/manufacturedProduct/manufacturedMaterial"})-[*]->
+        (v {`https:lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/MedicationSubstanceAdministration/consumable/manufacturedProduct/manufacturedMaterial/code"})
       return v as drugCode
-    # match (:ManufacturedMaterial)-[]->(v {`ls:schemaNodeId`:"https://hl7.org/ccda/v3/MedicationSubstanceAdministration/consumable/manufacturedProduct/manufacturedMaterial/code"})
+    # match (:ManufacturedMaterial)-[]->(v {`https:lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/MedicationSubstanceAdministration/consumable/manufacturedProduct/manufacturedMaterial/code"})
     mapContext: return drugCode
   "https://dartnet.info/graphModel/DrugExposure/system":
     source: https://hl7.org/ccda/v3/MedicationSubstanceAdministration/consumable/manufacturedProduct/manufacturedMaterial/code/codeSystem
@@ -208,7 +208,7 @@ reshapeNodes:
 
   "https://dartnet.info/graphModel/Visit/source":
     evaluate: >-
-      match (visit)-[]->(n {`ls:schemaNodeId`:"https://hl7.org/ccda/v3/encounter/code"}) return n as visitCode
+      match (visit)-[]->(n {`https:lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/encounter/code"}) return n as visitCode
     valueExpr:
       - return visitCode
   
