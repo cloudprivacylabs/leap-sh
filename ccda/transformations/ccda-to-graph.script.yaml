@@ -181,11 +181,11 @@ reshapeNodes:
   #   # match (:ManufacturedMaterial)-[]->(v {`https://lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/MedicationSubstanceAdministration/consumable/manufacturedProduct/manufacturedMaterial/code"})
   #   mapContext: return drugCode
 
-  "https://dartnet.info/graphModel/DrugExposure/drug/system":
+  "https://dartnet.info/graphModel/DrugExposure/drug/source/system":
     source: https://hl7.org/ccda/v3/MedicationSubstanceAdministration/consumable/manufacturedProduct/manufacturedMaterial/code/codeSystem
-  "https://dartnet.info/graphModel/DrugExposure/drug/code":
+  "https://dartnet.info/graphModel/DrugExposure/drug/source/code":
     source: https://hl7.org/ccda/v3/MedicationSubstanceAdministration/consumable/manufacturedProduct/manufacturedMaterial/code/code
-  "https://dartnet.info/graphModel/DrugExposure/drug/text":
+  "https://dartnet.info/graphModel/DrugExposure/drug/source/text":
     source: https://hl7.org/ccda/v3/MedicationSubstanceAdministration/consumable/manufacturedProduct/manufacturedMaterial/code/displayName
     
 #### Visit
