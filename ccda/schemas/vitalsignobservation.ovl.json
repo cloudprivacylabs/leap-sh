@@ -7,12 +7,12 @@
     "attributeOverlays": [
         {
             "@id":"https://hl7.org/ccda/v3/VitalSigns/Observation",
-            "@type": ["Object","Observation","VitalSignObservation"]
+            "@type": ["Object","Observation","VitalSignsObservation"]
         }
     ],
     "layer": {
         "@id":"https://hl7.org/ccda/v3/VitalSigns/Observation",
-        "@type": ["Object","VitalSignObservation"],
+        "@type": ["Object","VitalSignsObservation"],
         "attributes": {
             "https://hl7.org/ccda/v3/VitalSigns/Observation/Patient": {
                 "@type": "Reference",

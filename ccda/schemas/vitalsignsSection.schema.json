@@ -132,28 +132,28 @@
                                 "attributeName": "code",
                                 "attributeList": [
                                     {
-                                        "@id": "https://hl7.org/ccda/v3/VotalSignsSection/entry/organizer/code/code",
+                                        "@id": "https://hl7.org/ccda/v3/VitalSignsObservation/entry/organizer/code/code",
                                         "@type": "Value",
                                         "attributeName": "code",
                                         "ingestAs": "property",
                                         "xmlattribute": true
                                     },
                                     {
-                                        "@id": "https://hl7.org/ccda/v3/VotalSignsSection/entry/organizer/code/displayName",
+                                        "@id": "https://hl7.org/ccda/v3/VitalSignsObservation/entry/organizer/code/displayName",
                                         "@type": "Value",
                                         "attributeName": "displayName",
                                         "ingestAs": "property",
                                         "xmlattribute": true
                                     },
                                     {
-                                        "@id": "https://hl7.org/ccda/v3/VotalSignsSection/entry/organizer/code/system",
+                                        "@id": "https://hl7.org/ccda/v3/VitalSignsObservation/entry/organizer/code/system",
                                         "@type": "Value",
                                         "attributeName": "codeSystem",
                                         "ingestAs": "property",
                                         "xmlattribute": true
                                     },
                                     {
-                                        "@id": "https://hl7.org/ccda/v3/VotalSignsSection/entry/organizer/code/systemName",
+                                        "@id": "https://hl7.org/ccda/v3/VitalSignsObservation/entry/organizer/code/systemName",
                                         "@type": "Value",
                                         "attributeName": "codeSystemName",
                                         "ingestAs": "property",
