@@ -182,7 +182,7 @@ reshapeNodes:
   #   mapContext: return drugCode
 
   "https://dartnet.info/graphModel/DrugExposure/drug/source/system":
-    source: https://hl7.org/ccda/v3/MedicationSubstanceAdministration/consumable/manufacturedProduct/manufacturedMaterial/code/codeSystem
+    source: https://hl7.org/ccda/v3/MedicationSubstanceAdministration/consumable/manufacturedProduct/manufacturedMaterial/code/system
   "https://dartnet.info/graphModel/DrugExposure/drug/source/code":
     source: https://hl7.org/ccda/v3/MedicationSubstanceAdministration/consumable/manufacturedProduct/manufacturedMaterial/code/code
   "https://dartnet.info/graphModel/DrugExposure/drug/source/text":
@@ -190,28 +190,28 @@ reshapeNodes:
     
 #### Visit
 
-  "https://dartnet.info/graphModel/Visit/visit/element":
-    evaluate: 
-    - >-
-      match (n:Encounter) return n as visit
-    valueExpr:
-      return visit
-    mapContext: return visit
+  # "https://dartnet.info/graphModel/Visit/visit":
+  #   evaluate: 
+  #   - >-
+  #     match (n:Encounter) return n as visit
+  #   valueExpr:
+  #     return visit
+  #   mapContext: return visit
 
-  "https://dartnet.info/graphModel/Visit/id":
-    source: https://hl7.org/ccda/v3/encounter/id/root
+  # "https://dartnet.info/graphModel/Visit/id":
+  #   source: https://hl7.org/ccda/v3/encounter/id/root
 
   
-  "https://dartnet.info/graphModel/Visit/measuredValue/source":
-    valueExpr: >-
-      match (visit)-[]->(v {`https://lschema.org/attributeName`:"valueQuantity"}) return v as valueQuantity
-    mapContext: return valueQuantity
+  # "https://dartnet.info/graphModel/Visit/measuredValue/source":
+  #   valueExpr: >-
+  #     match (visit)-[]->(v {`https://lschema.org/attributeName`:"valueQuantity"}) return v as valueQuantity
+  #   mapContext: return valueQuantity
 
-  "https://dartnet.info/graphModel/Visit/source":
-    evaluate: >-
-      match (visit)-[]->(n {`https://lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/encounter/code"}) return n as visitCode
-    valueExpr:
-      - return visitCode
+  # "https://dartnet.info/graphModel/Visit/source":
+  #   evaluate: >-
+  #     match (visit)-[]->(n {`https://lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/encounter/code"}) return n as visitCode
+  #   valueExpr:
+  #     - return visitCode
   
   # "https://dartnet.info/graphModel/Visit/source/system":
   #   valueExpr:
