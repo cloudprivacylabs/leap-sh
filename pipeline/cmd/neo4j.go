@@ -113,6 +113,8 @@ type MergeGraphStep struct {
 	mu sync.Mutex
 }
 
+func (MergeGraphStep) Name() string { return "neo4j/merge" }
+
 func (s *MergeGraphStep) getIDToCache(g *lpg.Graph) string {
 	if len(s.CacheByID) == 0 {
 		return ""

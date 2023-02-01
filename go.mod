@@ -4,6 +4,8 @@ go 1.19
 
 replace github.com/cloudprivacylabs/lsa-neo4j => /Users/jasoncruz/lsa-neo4j
 
+replace github.com/cloudprivacylabs/lsa => /Users/jasoncruz/lsa
+
 require (
 	github.com/DATA-DOG/go-sqlmock v1.5.0
 	github.com/cloudprivacylabs/lpg v1.0.11
