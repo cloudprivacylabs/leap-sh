@@ -1,0 +1,24 @@
+{
+    "@context": "https://lschema.org/ls.json",
+    "@id": "https://dartnet.info/graphModel/Condition/omop-ovl",
+    "@type": "Overlay",
+    "valueType": "https://dartnet.info/graphModel/Condition",
+    "attributeOverlays": [
+        {
+            "@id": "https://dartnet.info/graphModel/Condition/omop",
+            "@type": "Array",
+            "vsValuesets": ["omop"],
+            "vsRequestValues": [ 
+                "https://dartnet.info/graphModel/Condition/source/code",
+                "https://dartnet.info/graphModel/Condition/source/normalizedSystemName" 
+            ],
+            "vsRequestKeys": [ "code", "system" ],
+            "vsResultKeys": [ "concept_id","concept_name"],
+            "vsResultValues": [
+                "https://ohdsi.org/omop/concept/id",
+                "https://ohdsi.org/omop/concept/name"
+            ],
+            "vsResultContext": "https://dartnet.info/graphModel/Condition/omop/items"
+        }
+    ]
+}
