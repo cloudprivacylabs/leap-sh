@@ -158,6 +158,17 @@
                                         "attributeName": "codeSystemName",
                                         "ingestAs": "property",
                                         "xmlattribute": true
+                                    },
+                                    {
+                                        "@id": "https://hl7.org/ccda/v3/VitalSignObservation/entry/organizer/code/normalizedSystemName",
+                                        "@type": "Value",
+                                        "vsValuesets": "vocabularies",
+                                        "vsRequestValues": [
+                                            "https://hl7.org/ccda/v3/VitalSignObservation/entry/organizer/code/system"
+                                        ],
+                                        "vsResultValues": [
+                                            "https://hl7.org/ccda/v3/VitalSignObservation/entry/organizer/code/normalizedSystemName"
+                                        ]
                                     }
                                 ]
                            },

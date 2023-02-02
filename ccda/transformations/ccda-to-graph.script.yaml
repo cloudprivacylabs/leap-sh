@@ -190,16 +190,13 @@ reshapeNodes:
     
 #### Visit
 
-  # "https://dartnet.info/graphModel/Visit/visit":
-  #   evaluate: 
-  #   - >-
-  #     match (n:Encounter) return n as visit
-  #   valueExpr:
-  #     return visit
-  #   mapContext: return visit
+  "https://dartnet.info/graphModel/Visit/visit":
+    valueExpr:
+      match (n:Encounter) return n as visit
+    mapContext: return visit
 
-  # "https://dartnet.info/graphModel/Visit/id":
-  #   source: https://hl7.org/ccda/v3/encounter/id/root
+  "https://dartnet.info/graphModel/Visit/id":
+    source: https://hl7.org/ccda/v3/encounter/id/root
 
   
   # "https://dartnet.info/graphModel/Visit/measuredValue/source":
@@ -223,13 +220,17 @@ reshapeNodes:
   #   valueExpr:
   #     - return visitCode.displayName
   
-  # "https://dartnet.info/graphModel/Visit/type":
-  #   evaluate:
-  #     - >-
-  #       match (visit)-[*]->(c {system:"http://terminology.hl7.org/CodeSystem/appointment-category"})
-  #              return c as visitTypeCode
-  #   valueExpr:
-  #     - return visitTypeCode.code
+  "https://dartnet.info/graphModel/Visit/type":
+    evaluate:
+      - >-
+        match (visit)-[*]->(c {system:"http://terminology.hl7.org/CodeSystem/appointment-category"})
+               return c as visitTypeCode
+    valueExpr:
+      - return visitTypeCode.code
+  
+  "https://dartnet.info/graphModel/Visit/person":
+    valueExpr:
+      - match (visit)-[]->(id {`https://lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/Patient/id"}) return id
 
   # "https://dartnet.info/graphModel/Appointment/id":
   #   source: https://hl7.org/ccda/v3/Procedure/id

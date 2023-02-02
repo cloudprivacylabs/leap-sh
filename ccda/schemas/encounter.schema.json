@@ -89,6 +89,17 @@
                         "xmlattribute": true
                     },
                     {
+                        "@id": "https://hl7.org/ccda/v3/Encounter/code/normalizedSystemName",
+                        "@type": "Value",
+                        "vsValuesets": "vocabularies",
+                        "vsRequestValues": [
+                            "https://hl7.org/ccda/v3/Encounter/code/system"
+                        ],
+                        "vsResultValues": [
+                            "https://hl7.org/ccda/v3/Encounter/code/normalizedSystemName"
+                        ]
+                    },
+                    {
                         "@id": "https://hl7.org/ccda/v3/encounter/code/translation",
                         "@type": "Object",
                         "conditional": "mustHaveChildren",
@@ -125,7 +136,7 @@
             {
                 "@id": "https://hl7.org/ccda/v3/encounter/author",
                 "@type": "Reference",
-                "ref": "Author",
+                "ref": "Encounter",
                 "xmlns":"urn:hl7-org:v3",
                 "attributeName": "author"
             },

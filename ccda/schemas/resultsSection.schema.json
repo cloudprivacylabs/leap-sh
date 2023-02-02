@@ -50,6 +50,17 @@
                         "attributeName": "codeSystemName",
                         "ingestAs": "property",
                         "xmlattribute": true
+                    },
+                    {
+                        "@id": "https://hl7.org/ccda/v3/ResultsSection/code/normalizedSystemName",
+                        "@type": "Value",
+                        "vsValuesets": "vocabularies",
+                        "vsRequestValues": [
+                            "https://hl7.org/ccda/v3/ResultsSection/code/system"
+                        ],
+                        "vsResultValues": [
+                            "https://hl7.org/ccda/v3/ResultsSection/code/normalizedSystemName"
+                        ]
                     }
                 ]
             },
@@ -86,6 +97,17 @@
                         "attributeName": "codeSystemName",
                         "ingestAs": "property",
                         "xmlattribute": true
+                    },
+                    {
+                        "@id": "https://hl7.org/ccda/v3/ResultsSection/confidentialityCode/normalizedSystemName",
+                        "@type": "Value",
+                        "vsValuesets": "vocabularies",
+                        "vsRequestValues": [
+                            "https://hl7.org/ccda/v3/ResultsSection/confidentialityCode/system"
+                        ],
+                        "vsResultValues": [
+                            "https://hl7.org/ccda/v3/ResultsSection/confidentialityCode/normalizedSystemName"
+                        ]
                     }
                 ]
             },
@@ -157,6 +179,17 @@
                                         "attributeName": "codeSystemName",
                                         "ingestAs": "property",
                                         "xmlattribute": true
+                                    },
+                                    {
+                                        "@id": "https://hl7.org/ccda/v3/ResultsSection/entry/organizer/code/normalizedSystemName",
+                                        "@type": "Value",
+                                        "vsValuesets": "vocabularies",
+                                        "vsRequestValues": [
+                                            "https://hl7.org/ccda/v3/ResultsSection/entry/organizer/code/system"
+                                        ],
+                                        "vsResultValues": [
+                                            "https://hl7.org/ccda/v3/ResultsSection/entry/organizer/code/normalizedSystemName"
+                                        ]
                                     }
                                 ]
                             },

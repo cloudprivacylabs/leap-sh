@@ -1,0 +1,30 @@
+base: ../graphmodel/graphmodel.bundle.yaml
+variants:
+  https://dartnet.info/graphModel/Observation:
+    schema: ../graphmodel/observation.json
+    overlays:
+      - schema: ../graphmodel/observation.overlay.json
+  https://dartnet.info/graphModel/Condition:
+    schema: ../graphmodel/condition.json
+    overlays:
+      - schema: ../graphmodel/condition.overlay.json
+  https://dartnet.info/graphModel/DrugExposure:
+    schema: ../graphmodel/drugexposure.json
+    overlays:
+      - schema: ../graphmodel/drugexposure.overlay.json
+  https://dartnet.info/graphModel/Measurement:
+    schema: ../graphmodel/measurement.json
+    overlays:
+      - schema: ../graphmodel/measurement.overlay.json
+  https://dartnet.info/graphModel/PayerPlan:
+    schema: ../graphmodel/payerplan.json
+    overlays:
+      - schema: ../graphmodel/payerplan.overlay.json
+  https://dartnet.info/graphModel/Procedure:
+    schema: ../graphmodel/procedure.json
+    overlays:
+      - schema: ../graphmodel/procedure.overlay.json
+  https://dartnet.info/graphModel/Visit:
+    schema: ../graphmodel/visit.json
+    overlays:
+      - schema: ../graphmodel/visit.overlay.json

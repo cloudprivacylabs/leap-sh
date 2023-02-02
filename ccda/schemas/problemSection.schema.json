@@ -50,6 +50,17 @@
                         "attributeName": "codeSystemName",
                         "ingestAs": "property",
                         "xmlattribute": true
+                    },
+                    {
+                        "@id": "https://hl7.org/ccda/v3/ProblemSection/code/normalizedSystemName",
+                        "@type": "Value",
+                        "vsValuesets": "vocabularies",
+                        "vsRequestValues": [
+                            "https://hl7.org/ccda/v3/ProblemSection/code/system"
+                        ],
+                        "vsResultValues": [
+                            "https://hl7.org/ccda/v3/ProblemSection/code/normalizedSystemName"
+                        ]
                     }
                 ]
             },
@@ -86,6 +97,17 @@
                         "attributeName": "codeSystemName",
                         "ingestAs": "property",
                         "xmlattribute": true
+                    },
+                    {
+                        "@id": "https://hl7.org/ccda/v3/ProblemSection/confidentialityCode/normalizedSystemName",
+                        "@type": "Value",
+                        "vsValuesets": "vocabularies",
+                        "vsRequestValues": [
+                            "https://hl7.org/ccda/v3/ProblemSection/confidentialityCode/system"
+                        ],
+                        "vsResultValues": [
+                            "https://hl7.org/ccda/v3/ProblemSection/confidentialityCode/normalizedSystemName"
+                        ]
                     }
                 ]
             },
