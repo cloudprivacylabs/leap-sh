@@ -5,12 +5,12 @@
     "valueType": "https://dartnet.info/graphModel/DrugExposure",
     "attributeOverlays": [
         {
-            "@id": "https://dartnet.info/graphModel/DrugExposure/omop",
+            "@id": "https://dartnet.info/graphModel/DrugExposure/drug/omop",
             "@type": "Array",
             "vsValuesets": ["omop"],
             "vsRequestValues": [ 
                 "https://dartnet.info/graphModel/DrugExposure/source/code",
-                "https://dartnet.info/graphModel/DrugExposure/source/normalizedSystemName" 
+                "https://dartnet.info/graphModel/DrugExposure/source/system" 
             ],
             "vsRequestKeys": [ "code", "system" ],
             "vsResultKeys": [ "concept_id","concept_name"],
