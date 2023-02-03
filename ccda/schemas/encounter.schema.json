@@ -7,11 +7,11 @@
         "@type": "Object",
         "@id":"https://hl7.org/ccda/v3/Encounter",
         "entityIdFields": [
-            "https://hl7.org/ccda/v3/encounter/id/root",
-            "https://hl7.org/ccda/v3/encounter/id/extension"
+            "https://hl7.org/ccda/v3/Encounter/id/root",
+            "https://hl7.org/ccda/v3/Encounter/id/extension"
         ],
         "xmlns": "urn:hl7-org:v3",
-        "attributeName": "encounter",
+        "attributeName": "Encounter",
         "attributeList": [
             {
                 "@id": "https://hl7.org/ccda/v3/Encounter/Patient",
@@ -22,31 +22,31 @@
                 "referenceLabel": "https://lschema.org/has"
             },
             {
-                "@id": "https://hl7.org/ccda/v3/encounter/classCode",
+                "@id": "https://hl7.org/ccda/v3/Encounter/classCode",
                 "@type": "Value",
                 "attributeName": "classCode",
                 "ingestAs": "property",
                 "xmlattribute": true
             },
             {
-                "@id": "https://hl7.org/ccda/v3/encounter/moodCode",
+                "@id": "https://hl7.org/ccda/v3/Encounter/moodCode",
                 "@type": "Value",
                 "attributeName": "moodCode",
                 "ingestAs": "property",
                 "xmlattribute": true
             },
             {
-                "@id": "https://hl7.org/ccda/v3/encounter/id",
+                "@id": "https://hl7.org/ccda/v3/Encounter/id",
                 "@type": "Object",
                 "xmlns": "urn:hl7-org:v3",
                 "attributeName": "id",
                 "attributes": {
-                    "https://hl7.org/ccda/v3/encounter/id/root": {
+                    "https://hl7.org/ccda/v3/Encounter/id/root": {
                         "@type": "Value",
                         "attributeName": "root",
                         "xmlattribute": true
                     },
-                    "https://hl7.org/ccda/v3/encounter/id/extension": {
+                    "https://hl7.org/ccda/v3/Encounter/id/extension": {
                         "@type": "Value",
                         "attributeName": "extension",
                         "xmlattribute": true
@@ -54,35 +54,35 @@
                 }
             },
             {
-                "@id": "https://hl7.org/ccda/v3/encounter/code",
+                "@id": "https://hl7.org/ccda/v3/Encounter/code",
                 "@type": ["Object","Code"],
                 "xmlns": "urn:hl7-org:v3",
                 "attributeName": "code",
                 "conditional": "mustHaveChildren",
                 "attributeList": [
                     {
-                        "@id": "https://hl7.org/ccda/v3/encounter/code/code",
+                        "@id": "https://hl7.org/ccda/v3/Encounter/code/code",
                         "@type": "Value",
                         "attributeName": "code",
                         "ingestAs": "property",
                         "xmlattribute": true
                     },
                     {
-                        "@id": "https://hl7.org/ccda/v3/encounter/code/displayName",
+                        "@id": "https://hl7.org/ccda/v3/Encounter/code/displayName",
                         "@type": "Value",
                         "attributeName": "displayName",
                         "ingestAs": "property",
                         "xmlattribute": true
                     },
                     {
-                        "@id": "https://hl7.org/ccda/v3/encounter/code/system",
+                        "@id": "https://hl7.org/ccda/v3/Encounter/code/system",
                         "@type": "Value",
                         "attributeName": "codeSystem",
                         "ingestAs": "property",
                         "xmlattribute": true
                     },
                     {
-                        "@id": "https://hl7.org/ccda/v3/encounter/code/systemName",
+                        "@id": "https://hl7.org/ccda/v3/Encounter/code/systemName",
                         "@type": "Value",
                         "attributeName": "codeSystemName",
                         "ingestAs": "property",
@@ -100,30 +100,30 @@
                         ]
                     },
                     {
-                        "@id": "https://hl7.org/ccda/v3/encounter/code/translation",
+                        "@id": "https://hl7.org/ccda/v3/Encounter/code/translation",
                         "@type": "Object",
                         "conditional": "mustHaveChildren",
                         "attributeName": "translation",
                         "attributes": {
-                            "https://hl7.org/ccda/v3/encounter/code/translation/code": {
+                            "https://hl7.org/ccda/v3/Encounter/code/translation/code": {
                                 "@type": "Value",
                                 "attributeName": "code",
                                 "ingestAs": "property",
                                 "xmlattribute": true
                             },
-                            "https://hl7.org/ccda/v3/encounter/code/translation/displayName": {
+                            "https://hl7.org/ccda/v3/Encounter/code/translation/displayName": {
                                 "@type": "Value",
                                 "attributeName": "displayName",
                                 "ingestAs": "property",
                                 "xmlattribute": true
                             },
-                            "https://hl7.org/ccda/v3/encounter/code/translation/displayName": {
+                            "https://hl7.org/ccda/v3/Encounter/code/translation/system": {
                                 "@type": "Value",
                                 "attributeName": "codeSystem",
                                 "ingestAs": "property",
                                 "xmlattribute": true
                             },
-                            "https://hl7.org/ccda/v3/encounter/code/translation/displayName": {
+                            "https://hl7.org/ccda/v3/Encounter/code/translation/systemName": {
                                 "@type": "Value",
                                 "attributeName": "codeSystemName",
                                 "ingestAs": "property",
@@ -134,7 +134,7 @@
                 ]
             },
             {
-                "@id": "https://hl7.org/ccda/v3/encounter/author",
+                "@id": "https://hl7.org/ccda/v3/Encounter/author",
                 "@type": "Reference",
                 "ref": "Encounter",
                 "xmlns":"urn:hl7-org:v3",

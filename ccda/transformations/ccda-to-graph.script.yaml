@@ -37,7 +37,7 @@ reshapeNodes:
     mapContext: return measurementSource
   
   "https://dartnet.info/graphModel/Measurement/source/system":
-    source: https://hl7.org/ccda/v3/VitalSigns/Observation/code/system 
+    source: https://hl7.org/ccda/v3/VitalSigns/Observation/code/normalizedSystemName 
     
   "https://dartnet.info/graphModel/Measurement/source/code":
     source: https://hl7.org/ccda/v3/VitalSigns/Observation/code/code 
@@ -47,9 +47,10 @@ reshapeNodes:
 
   ### Condition
 
+  ## ProblemObservation
   "https://dartnet.info/graphModel/Person/conditions/element":
     valueExpr: >-
-      match (cond:ProblemObservation) return cond as cond
+      match (cond:ProblemAct) return cond as cond
     mapContext: >-
       return cond
 
@@ -110,7 +111,7 @@ reshapeNodes:
     #   - return observationCode
   
   "https://dartnet.info/graphModel/Observation/source/system":
-    source: https://hl7.org/ccda/v3/ProblemAct/Observation/code/system
+    source: https://hl7.org/ccda/v3/ProblemAct/Observation/code/normalizedSystemName
 
   "https://dartnet.info/graphModel/Observation/source/code":
     source: https://hl7.org/ccda/v3/ProblemAct/Observation/code/code
@@ -136,7 +137,7 @@ reshapeNodes:
     valueExpr: match (Procedure)-[]->(n {`https://lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/Procedure/code"}) return n as procedureSource
     mapContext: return procedureSource
 
-  "https://dartnet.info/graphModel/Procedure/source/system":
+  "https://dartnet.info/graphModel/Procedure/source/normalizedSystemName":
     valueExpr:
       - return procedureSource.codeSystem
   "https://dartnet.info/graphModel/Procedure/source/code":
@@ -182,7 +183,7 @@ reshapeNodes:
   #   mapContext: return drugCode
 
   "https://dartnet.info/graphModel/DrugExposure/drug/source/system":
-    source: https://hl7.org/ccda/v3/MedicationSubstanceAdministration/consumable/manufacturedProduct/manufacturedMaterial/code/system
+    source: https://hl7.org/ccda/v3/MedicationSubstanceAdministration/consumable/manufacturedProduct/manufacturedMaterial/code/normalizedSystemName
   "https://dartnet.info/graphModel/DrugExposure/drug/source/code":
     source: https://hl7.org/ccda/v3/MedicationSubstanceAdministration/consumable/manufacturedProduct/manufacturedMaterial/code/code
   "https://dartnet.info/graphModel/DrugExposure/drug/source/text":

@@ -81,37 +81,10 @@
                     },
                     {
                         "@id": "https://hl7.org/ccda/v3/Observation/code/normalizedSystemName",
-                        "@type": "Value",
-                        "vsValuesets": "vocabularies",
-                        "vsRequestValues": [
-                            "https://hl7.org/ccda/v3/Observation/code/system"
-                        ],
-                        "vsResultValues": [
-                            "https://hl7.org/ccda/v3/Observation/code/normalizedSystemName"
-                        ]
+                        "@type": "Value"
                     }
                 ]
             },
-            {
-                "@id": "https://hl7.org/ccda/v3/Observation/concept_id",
-                "@type": ["Value","concept_id"],
-                "vsValuesets": "observation",
-                "vsRequestKeys": [
-                    "code",
-                    "vocabulary"
-                ],
-                "vsRequestValues": [
-                    "https://hl7.org/ccda/v3/Observation/code/code",
-                    "https://hl7.org/ccda/v3/Observation/code/normalizedSystemName"
-                ],
-                "vsResultKeys": [
-                    "concept_id"
-                ],
-                "vsResultValues": [
-                    "https://hl7.org/ccda/v3/Observation/concept_id"
-                ]
-            },
-
             {
                 "@id": "https://hl7.org/ccda/v3/Observation/effectiveTime",
                 "@type": ["Object","EffectiveTime"],
@@ -157,25 +130,6 @@
                             "YYYMMDDhhmmssZZ"
                         ]
                     }
-                ]
-            },
-            {
-                "@id": "https://hl7.org/ccda/v3/Observation/valueConcept_id",
-                "@type": ["Value","concept_id"],
-                "vsValuesets": "observation",
-                "vsRequestKeys": [
-                    "code",
-                    "vocabulary"
-                ],
-                "vsRequestValues": [
-                    "https://hl7.org/ccda/v3/Observation/value/code",
-                    "https://hl7.org/ccda/v3/Observation/value/normalizedSystemName"
-                ],
-                "vsResultKeys": [
-                    "concept_id"
-                ],
-                "vsResultValues": [
-                    "https://hl7.org/ccda/v3/Observation/valueConcept_id"
                 ]
             },
             {
@@ -236,14 +190,7 @@
                     },
                     {
                         "@id": "https://hl7.org/ccda/v3/Observation/value/normalizedSystemName",
-                        "@type": "Value",
-                        "vsValuesets": "vocabularies",
-                        "vsRequestValues": [
-                            "https://hl7.org/ccda/v3/Observation/value/system"
-                        ],
-                        "vsResultValues": [
-                            "https://hl7.org/ccda/v3/Observation/value/normalizedSystemName"
-                        ]
+                        "@type": "Value"
                     }
                ]
             }

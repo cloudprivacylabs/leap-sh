@@ -6,9 +6,31 @@
     "nsMap": "https://hl7.org/ccda/v3/Act -> https://hl7.org/ccda/v3/ProblemAct",
     "attributeOverlays": [
         {
-            "@id": "https://hl7.org/ccda/v3/ProblemAct/entryRelationship/observation",
+            "@id": "https://hl7.org/ccda/v3/ProblemAct/entryRelationship/Observation",
             "@type": "Reference",
             "ref": "ProblemActObservation"
+        },
+        {
+            "@id": "https://hl7.org/ccda/v3/ProblemAct/value/normalizedSystemName",
+            "@type": "Value",
+            "vsValuesets": "vocabularies",
+            "vsRequestValues": [
+                "https://hl7.org/ccda/v3/ProblemAct/value/system"
+            ],
+            "vsResultValues": [
+                "https://hl7.org/ccda/v3/ProblemAct/value/normalizedSystemName"
+            ]
+        },
+        {
+            "@id": "https://hl7.org/ccda/v3/ProblemAct/code/normalizedSystemName",
+            "@type": "Value",
+            "vsValuesets": "vocabularies",
+            "vsRequestValues": [
+                "https://hl7.org/ccda/v3/ProblemAct/code/system"
+            ],
+            "vsResultValues": [
+                "https://hl7.org/ccda/v3/ProblemAct/code/normalizedSystemName"
+            ]
         }
     ],
     "layer": {

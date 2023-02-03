@@ -160,14 +160,14 @@
                                         "xmlattribute": true
                                     },
                                     {
-                                        "@id": "https://hl7.org/ccda/v3/VitalSignObservation/entry/organizer/code/normalizedSystemName",
+                                        "@id": "https://hl7.org/ccda/v3/VitalSignsObservation/entry/organizer/code/normalizedSystemName",
                                         "@type": "Value",
                                         "vsValuesets": "vocabularies",
                                         "vsRequestValues": [
-                                            "https://hl7.org/ccda/v3/VitalSignObservation/entry/organizer/code/system"
+                                            "https://hl7.org/ccda/v3/VitalSignsObservation/entry/organizer/code/system"
                                         ],
                                         "vsResultValues": [
-                                            "https://hl7.org/ccda/v3/VitalSignObservation/entry/organizer/code/normalizedSystemName"
+                                            "https://hl7.org/ccda/v3/VitalSignsObservation/entry/organizer/code/normalizedSystemName"
                                         ]
                                     }
                                 ]
@@ -180,7 +180,7 @@
                                 "attributes": {
                                     "https://hl7.org/ccda/v3/VitalSignsSection/entry/organizer/component/observation": {
                                         "@type": ["Reference"],
-                                        "ref": "VitalSignObservation"
+                                        "ref": "VitalSignsObservation"
                                     }
                                 }
                             }

@@ -6,7 +6,7 @@
     "nsMap": "https://hl7.org/ccda/v3/Act -> https://hl7.org/ccda/v3/AllergyAct",
     "attributeOverlays": [
         {
-            "@id":"https://hl7.org/ccda/v3/Allergyct",
+            "@id":"https://hl7.org/ccda/v3/AllergyAct",
             "@type": ["Object","AllergyAct"]
         },
         {
@@ -14,9 +14,31 @@
             "@type": ["Object","Code","AllergyActCode"]
         },
         {
+            "@id": "https://hl7.org/ccda/v3/AllergyAct/value/normalizedSystemName",
+            "@type": "Value",
+            "vsValuesets": "vocabularies",
+            "vsRequestValues": [
+                "https://hl7.org/ccda/v3/AllergyAct/value/system"
+            ],
+            "vsResultValues": [
+                "https://hl7.org/ccda/v3/AllergyAct/value/normalizedSystemName"
+            ]
+        },
+        {
+            "@id": "https://hl7.org/ccda/v3/AllergyAct/code/normalizedSystemName",
+            "@type": "Value",
+            "vsValuesets": "vocabularies",
+            "vsRequestValues": [
+                "https://hl7.org/ccda/v3/AllergyAct/code/system"
+            ],
+            "vsResultValues": [
+                "https://hl7.org/ccda/v3/AllergyAct/code/normalizedSystemName"
+            ]
+        },
+        {
             "@id": "https://hl7.org/ccda/v3/AllergyAct/entryRelationship/observation",
             "@type": "Reference",
-            "ref": "AllergyActObservation"
+            "ref": "AllergyAct"
         }
    ]
 }

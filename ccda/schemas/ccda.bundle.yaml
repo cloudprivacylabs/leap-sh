@@ -77,7 +77,7 @@ variants:
     schema: encounter.schema.json
   VitalSignsSection: 
     schema: vitalsignsSection.schema.json
-  VitalSignObservation: 
+  VitalSignsObservation: 
     schema: observation.schema.json
     overlays:
-      - schema: vitalsignobservation.ovl.json
+      - schema: vitalsignsobservation.ovl.json

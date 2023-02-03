@@ -14,9 +14,31 @@
             "@type": ["Object","Code","ProcedureActCode"]
         },
         {
-            "@id": "https://hl7.org/ccda/v3/Procedure/Act/entryRelationship/observation",
+            "@id": "https://hl7.org/ccda/v3/Procedure/Act/entryRelationship/Observation",
             "@type": "Reference",
             "ref": "ProcedureActObservation"
+        },
+        {
+            "@id": "https://hl7.org/ccda/v3/Procedure/Act/value/normalizedSystemName",
+            "@type": "Value",
+            "vsValuesets": "vocabularies",
+            "vsRequestValues": [
+                "https://hl7.org/ccda/v3/Procedure/Act/value/system"
+            ],
+            "vsResultValues": [
+                "https://hl7.org/ccda/v3/Procedure/Act/value/normalizedSystemName"
+            ]
+        },
+        {
+            "@id": "https://hl7.org/ccda/v3/Procedure/Act/code/normalizedSystemName",
+            "@type": "Value",
+            "vsValuesets": "vocabularies",
+            "vsRequestValues": [
+                "https://hl7.org/ccda/v3/Procedure/Act/code/system"
+            ],
+            "vsResultValues": [
+                "https://hl7.org/ccda/v3/Procedure/Act/code/normalizedSystemName"
+            ]
         }
     ],
     "layer": {

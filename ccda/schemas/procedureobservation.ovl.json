@@ -8,6 +8,28 @@
         {
             "@id":"https://hl7.org/ccda/v3/Procedure/Observation",
             "@type": ["Object","Observation","ProcedureObservation"]
+        },
+        {
+            "@id": "https://hl7.org/ccda/v3/Procedure/Observation/value/normalizedSystemName",
+            "@type": "Value",
+            "vsValuesets": "vocabularies",
+            "vsRequestValues": [
+                "https://hl7.org/ccda/v3/Procedure/Observation/value/system"
+            ],
+            "vsResultValues": [
+                "https://hl7.org/ccda/v3/Procedure/Observation/value/normalizedSystemName"
+            ]
+        },
+        {
+            "@id": "https://hl7.org/ccda/v3/Procedure/Observation/code/normalizedSystemName",
+            "@type": "Value",
+            "vsValuesets": "vocabularies",
+            "vsRequestValues": [
+                "https://hl7.org/ccda/v3/Procedure/Observation/code/system"
+            ],
+            "vsResultValues": [
+                "https://hl7.org/ccda/v3/Procedure/Observation/code/normalizedSystemName"
+            ]
         }
     ],
     "layer": {

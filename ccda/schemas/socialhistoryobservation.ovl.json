@@ -8,6 +8,28 @@
         {
             "@id":"https://hl7.org/ccda/v3/SocialHistory/Observation",
             "@type": ["Object","Observation","SocialHistoryObservation"]
+        },
+        {
+            "@id": "https://hl7.org/ccda/v3/SocialHistory/Observation/value/normalizedSystemName",
+            "@type": "Value",
+            "vsValuesets": "vocabularies",
+            "vsRequestValues": [
+                "https://hl7.org/ccda/v3/SocialHistory/Observation/value/system"
+            ],
+            "vsResultValues": [
+                "https://hl7.org/ccda/v3/SocialHistory/Observation/value/normalizedSystemName"
+            ]
+        },
+        {
+            "@id": "https://hl7.org/ccda/v3/SocialHistory/Observation/code/normalizedSystemName",
+            "@type": "Value",
+            "vsValuesets": "vocabularies",
+            "vsRequestValues": [
+                "https://hl7.org/ccda/v3/SocialHistory/Observation/code/system"
+            ],
+            "vsResultValues": [
+                "https://hl7.org/ccda/v3/SocialHistory/Observation/code/normalizedSystemName"
+            ]
         }
     ],
     "layer": {

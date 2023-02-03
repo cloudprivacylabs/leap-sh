@@ -11,6 +11,13 @@
       - schemas/ccda.bundle.yaml
     type: ClinicalDocument
     onlySchemaAttributes: true
+
+- operation: valueset
+  params:
+    valuesetFiles:
+      - valuesets.yaml
+    tables:
+      - vocabularies
 #- operation: writeGraph
 
 # Next step is to convert that CCDA graph into the common graph model.
@@ -25,12 +32,7 @@
 
 # - operation: writeGraph
     
-# - operation: valueset
-#   params:
-#     valuesetFiles:
-#       - valuesets.yaml
-#     tables:
-#       - vocabularies
+
 # - operation: valueset
 #   params:
 #     valuesetFiles:
