@@ -74,7 +74,7 @@ reshapeNodes:
   #     - return condCode
   
   "https://dartnet.info/graphModel/Condition/source/system":
-    source: https://hl7.org/ccda/v3/Observation/value/system
+    source: https://hl7.org/ccda/v3/Observation/value/normalizedSystemName
 
   "https://dartnet.info/graphModel/Condition/source/code":
     source: https://hl7.org/ccda/v3/Observation/value/code
