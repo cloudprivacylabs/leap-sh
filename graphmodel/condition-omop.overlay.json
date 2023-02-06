@@ -10,7 +10,7 @@
             "vsValuesets": ["omop"],
             "vsRequestValues": [ 
                 "https://dartnet.info/graphModel/Condition/source/code",
-                "https://dartnet.info/graphModel/Condition/source/normalizedSystemName" 
+                "https://dartnet.info/graphModel/Condition/source/system" 
             ],
             "vsRequestKeys": [ "code", "system" ],
             "vsResultKeys": [ "concept_id","concept_name"],

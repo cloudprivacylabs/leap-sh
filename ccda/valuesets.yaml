@@ -44,3 +44,13 @@ valuesets:
         result: "3212942"
         description: White
       - result: "0"
+
+databases:
+  - database:
+      pgx:
+      params:
+        uri: ${pguri}
+      valuesets:
+        - tableId: omop
+          queries:
+            - query: "select concept_id,concept_name,domain_id,vocabulary_id,concept_class_id,concept_code from concept where vocabulary_id=@system and concept_code=@code and valid_end_date='20991231';"

@@ -73,15 +73,14 @@ reshapeNodes:
   #   valueExpr:
   #     - return condCode
   
-  # "https://dartnet.info/graphModel/Condition/source/system":
-  #   valueExpr:
-  #     - return condCode.codeSystem
-  # "https://dartnet.info/graphModel/Condition/source/code":
-  #   valueExpr:
-  #     - return condCode.code
-  # "https://dartnet.info/graphModel/Condition/source/text":
-  #   valueExpr:
-  #     - return condCode.displayName
+  "https://dartnet.info/graphModel/Condition/source/system":
+    source: https://hl7.org/ccda/v3/Observation/value/system
+
+  "https://dartnet.info/graphModel/Condition/source/code":
+    source: https://hl7.org/ccda/v3/Observation/value/code
+    
+  "https://dartnet.info/graphModel/Condition/source/text":
+    source: https://hl7.org/ccda/v3/Observation/value/displayName
 
 ### Observation
 
@@ -137,7 +136,8 @@ reshapeNodes:
     valueExpr: match (Procedure)-[]->(n {`https://lschema.org/schemaNodeId`:"https://hl7.org/ccda/v3/Procedure/code"}) return n as procedureSource
     mapContext: return procedureSource
 
-  "https://dartnet.info/graphModel/Procedure/source/normalizedSystemName":
+  "https://dartnet.info/graphModel/Procedure/source/system":
+    source:
     valueExpr:
       - return procedureSource.codeSystem
   "https://dartnet.info/graphModel/Procedure/source/code":

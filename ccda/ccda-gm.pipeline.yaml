@@ -32,11 +32,10 @@
 
 # - operation: writeGraph
     
-
-# - operation: valueset
-#   params:
-#     valuesetFiles:
-#       - valuesets.yaml
+- operation: valueset
+  params:
+    valuesetFiles:
+      - valuesets.yaml
 # - operation: valueset
 #   params:
 #     valuesetFiles:
