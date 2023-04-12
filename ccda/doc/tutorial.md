@@ -3,7 +3,7 @@
 https://github.com/cloudprivacylabs.com/lsa
 
 ## Goal:
-By the end of this tutorial, you will have an understanding of what Layered Schemas Architecture (LSA) is and how to use its technology given an _OMOP_ concept. For our example, we will be using the [__OMOP__](https://www.ohdsi.org/data-standardization/) concepts dataset - you can find all Omop concepts here: https://athena.ohdsi.org/search-terms/start
+By the end of this tutorial, you will have an understanding of what Layered Schemas Architecture (LSA) is and how to use its technology given an _OMOP_ concept. For our example, we will be using the [__OMOP__](https://www.ohdsi.org/data-standardization/) concepts dataset - you can find all OMOP concepts here: https://athena.ohdsi.org/search-terms/start
 
 ## Prerequisites:
 ### If you do not have the following databases installed below, follow the direct page's instructions to set them up.
@@ -105,17 +105,14 @@ The operation of `ingest/xml` will take the XML file and combine it with the sch
 ![ingest](Aaron_Brekke_Short_after_ingest.png)
 #
 Zoomed in graph, focusing on the _Patient_ node.
-![ingest_zoomed](Aaron_Brekke_Short_after_ingest_zoomed.png)
+![ingest_zoomed](Aaron_Brekke_after_ingest_zoomed.png)
 
 ## Reshape
 The next step of the pipeline operations is `reshape` which will take the ingested graph, a different bundle which describes the next structure of how the ingested graph should be conformed to, and a transformation script which details the queries used to map the ingested graph to the definitions of the bundle schemas.
 
 After reshape the graph looks like this:
-![reshape](Aaron_Brekke_Short_after_reshape.png)
+![reshape](Aaron_Brekke_after_reshape.png)
 #
-
-A zoomed in view with a focus on the _Person_ node:
-![reshape_zoomed](Aaron_Brekke_Short_after_reshape_zoomed.png)
 
 >Take note of the differences in shape and properties from ingested graph to the reshaped graph.
 When running the `reshape` operation, the separate bundle _(graphmodel.bundle.yaml)_ that was listed in the pipeline file defined how the nodes from the ingested graph were mapped onto a new graph.
@@ -124,9 +121,8 @@ Following reshape, the next step listed in our pipeline file is operation `value
 
 ## Apply Valueset(s)
 The graph after applying the valueset(s):
-![valueset](Aaron_Brekke_Short_after_valueset.png)
-Zoomed in on the valueset additions:
-![valueset_zoomed](Aaron_Brekke_Short_after_valueset_zoomed.png)
+![valueset](Aaron_Brekke_after_valueset.png)
+
 > Structure of the graph is relatively the same as it was from the reshaping step, only now that we add additional valueset nodes which contain the normalized properties
 
 
@@ -136,7 +132,7 @@ To view the fully processed graph in Neo4j, run the query:
 ```
 MATCH (n) RETURN n
 ```
-![neo4j](Aaron_Brekke_Short_after_neo4j.png)
+![neo4j](Aaron_Brekke_after_neo4j.png)
 
 We have walked through and completed all the steps described by the pipeline file in processing a _CCDA_ code using the LSA binary. With this you should have a better understanding of how to process not just any _CCDA_ codes or any XML files, but with dissimilar data standard as well as different data formatting i.e. `HL7` standards with CSV files.
 

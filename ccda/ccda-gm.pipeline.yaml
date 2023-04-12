@@ -23,30 +23,32 @@
     type: https://dartnet.info/graphModel/Person
     scriptFile: transformations/ccda-to-graph.script.yaml
 
-- operation: writeGraph
-    
-# - operation: valueset
-#   params:
-#     valuesetFiles:
-#       - valuesets.json
-#     tables:
-#       - vocabularies
-# - operation: valueset
-#   params:
-#     valuesetFiles:
-#       - valuesets.json
-# - operation: valueset
-#   params:
-#     valuesetFiles:
-#       - valuesets.json
-# - operation: measures
-#   params:
 # - operation: writeGraph
-#- operation: saveGraph/neo4j
-#  params:
-#    cfg: ../lsaneo.config.yaml
-#    user: ${user}
-#    pwd: ${pwd}
-#    uri: ${uri}
-#    db: neo4j
-#    batchSize: 0
+    
+- operation: valueset
+  params:
+    valuesetFiles:
+      - valuesets.json
+    tables:
+      - vocabularies
+- operation: valueset
+  params:
+    valuesetFiles:
+      - valuesets.json
+- operation: valueset
+  params:
+    valuesetFiles:
+      - valuesets.json
+- operation: measures
+  params:
+# - operation: writeGraph
+- operation: neo4j/merge
+  params:
+    db: ${neo4j_db}
+    batchSize: 100
+    user: ${user}
+    pwd: ${pwd}
+    uri: ${uri}
+    cfg: ../lsaneo.config.yaml
+    cacheBy: https://dartnet.info/graphModel/Person
+
